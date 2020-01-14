@@ -12,7 +12,7 @@ namespace Dapper
     /// </summary>
     public static partial class DapperExt
     {
-        public static Task<int> AddAsync(this IDbConnection connection, dynamic data, string table, IDbTransaction transaction = null, int? commandTimeout = null)
+        public static Task<int> ExecInsertAsync(this IDbConnection connection, dynamic data, string table, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             var obj = data as object;
             var sql = BuildInsertSql(obj, table);
@@ -23,7 +23,7 @@ namespace Dapper
             return connection.ExecuteAsync(sql, obj, transaction, commandTimeout);
         }
 
-        public static Task<int> ModifyAsync(this IDbConnection connection, dynamic data, dynamic condition, string table, IDbTransaction transaction = null, int? commandTimeout = null)
+        public static Task<int> ExecUpdateAsync(this IDbConnection connection, dynamic data, dynamic condition, string table, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             var updateFields = BuildUpdateFields(data);
             (string Fields, IDictionary<string, object> Params) where = BuildConditionFields(condition);
@@ -37,7 +37,7 @@ namespace Dapper
             return connection.ExecuteAsync(sql, parameters, transaction, commandTimeout);
         }
 
-        public static Task<int> ModifyNotNullAsync(this IDbConnection connection, dynamic data, dynamic condition, string table, IDbTransaction transaction = null, int? commandTimeout = null)
+        public static Task<int> ExecUpdateNotNullAsync(this IDbConnection connection, dynamic data, dynamic condition, string table, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             var updateFields = BuildUpdateFieldsForNotNull(data);
             (string Fields, IDictionary<string, object> Params) where = BuildConditionFields(condition);
@@ -51,7 +51,7 @@ namespace Dapper
             return connection.ExecuteAsync(sql, parameters, transaction, commandTimeout);
         }
 
-        public static Task<long> GetCountAsync(this IDbConnection connection, dynamic condition, string table, IDbTransaction transaction = null, int? commandTimeout = null)
+        public static Task<long> ExecGetCountAsync(this IDbConnection connection, dynamic condition, string table, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             (string Fields, IDictionary<string, object> Params) where = BuildConditionFields(condition);
             var sql = $"SELECT COUNT(*) FROM {table} {where.Fields}";
@@ -63,7 +63,7 @@ namespace Dapper
             return connection.ExecuteScalarAsync<long>(sql, parameters, transaction, commandTimeout);
         }
 
-        public static Task<long> GetCountAsync(this IDbConnection connection, string where, dynamic whereObj, string table, IDbTransaction transaction = null, int? commandTimeout = null)
+        public static Task<long> ExecGetCountAsync(this IDbConnection connection, string where, dynamic whereObj, string table, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             var sql = $"SELECT COUNT(*) FROM {table} WHERE {where}";
 
