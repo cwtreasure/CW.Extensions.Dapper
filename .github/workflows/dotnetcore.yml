@@ -1,0 +1,23 @@
+name: Dapper Ext
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: Test with dotnet
+      run: dotnet test
+    - name: Pack with dotnet
+      run: dotnet pack /home/runner/work/CW.Extensions.Dapper/CW.Extensions.Dapper/src/CW.Extensions.Dapper/CW.Extensions.Dapper.csproj -o /home/runner/work -c Release --no-build
+    - name: Push to nuget
+      run: dotnet nuget push /home/runner/work/*.nupkg -k ${{ secrets.Nuget_Key }} -s http://nuget.org/api/v2/package
