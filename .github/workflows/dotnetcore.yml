@@ -1,6 +1,11 @@
 name: Dapper Ext
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
+    - release/*
+
 
 jobs:
   build:
@@ -15,8 +20,8 @@ jobs:
         dotnet-version: 3.1.101
     - name: Build with dotnet
       run: dotnet build --configuration Release
-    - name: Test with dotnet
-      run: dotnet test
+#     - name: Test with dotnet
+#       run: dotnet test
     - name: Pack with dotnet
       run: dotnet pack /home/runner/work/CW.Extensions.Dapper/CW.Extensions.Dapper/src/CW.Extensions.Dapper/CW.Extensions.Dapper.csproj -o /home/runner/work -c Release --no-build
     - name: Push to nuget
