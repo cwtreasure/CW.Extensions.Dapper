@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Owners>Catcher Wong</Owners>
     <Authors>Catcher Wong</Authors>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Description>
       some dapper extensions.
     </Description>

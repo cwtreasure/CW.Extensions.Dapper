@@ -17,7 +17,7 @@ namespace Dapper
             var sql = BuildInsertSql(obj, table);
 
             if (Debugger.IsAttached)
-                Debug.Write(sql);
+                Trace.WriteLine(sql);
 
             return connection.Execute(sql, obj, transaction, commandTimeout);
         }
@@ -29,7 +29,7 @@ namespace Dapper
             var sql = $"UPDATE {table} SET {updateFields} {where.Fields}";
 
             if (Debugger.IsAttached)
-                Debug.Write(sql);
+                Trace.WriteLine(sql);
 
             var parameters = new DynamicParameters(data);
             parameters.AddDynamicParams(where.Params);
@@ -43,7 +43,7 @@ namespace Dapper
             var sql = $"UPDATE {table} SET {updateFields} {where.Fields}";
 
             if (Debugger.IsAttached)
-                Debug.Write(sql);
+                Trace.WriteLine(sql);
 
             var parameters = new DynamicParameters(data);
             parameters.AddDynamicParams(where.Params);
@@ -56,7 +56,7 @@ namespace Dapper
             var sql = $"SELECT COUNT(*) FROM {table} {where.Fields}";
 
             if (Debugger.IsAttached)
-                Debug.Write(sql);
+                Trace.WriteLine(sql);
 
             var parameters = new DynamicParameters(where.Params);
             return connection.ExecuteScalar<long>(sql, parameters, transaction, commandTimeout);
@@ -67,7 +67,7 @@ namespace Dapper
             var sql = $"SELECT COUNT(*) FROM {table} WHERE {where}";
 
             if (Debugger.IsAttached)
-                Debug.Write(sql);
+                Trace.WriteLine(sql);
 
             var parameters = new DynamicParameters(whereObj);
             return connection.ExecuteScalar<long>(sql, parameters, transaction, commandTimeout);

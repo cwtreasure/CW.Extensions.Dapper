@@ -95,5 +95,53 @@
 
             Assert.Equal(exp, sql);
         }
+
+        [Fact]
+        public void UpdateNotNullModelWithIdTest()
+        {
+            var data = new UpdateDemo3 { Id = 1, Name = "cat" };
+            var con = new { id = 1 };
+            var sql = DapperExt.UpdateNotNull(data, con, "myt");
+
+            var exp = "UPDATE myt SET last_name = @Name WHERE id = @w_id";
+
+            Assert.Equal(exp, sql);
+        }
+
+        [Fact]
+        public void UpdateNotNullModelWithIdTest2()
+        {
+            var data = new UpdateDemo4 { Id = 1, Name = "cat" };
+            var con = new { id = 1 };
+            var sql = DapperExt.UpdateNotNull(data, con, "myt");
+
+            var exp = "UPDATE myt SET a_id = @Id, last_name = @Name WHERE id = @w_id";
+
+            Assert.Equal(exp, sql);
+        }
+
+        [Fact]
+        public void UpdateModelWithIdTest()
+        {
+            var data = new UpdateDemo3 { Id = 1, Name = "cat" };
+            var con = new { id = 1 };
+            var sql = DapperExt.Update(data, con, "myt");
+
+            var exp = "UPDATE myt SET last_name = @Name WHERE id = @w_id";
+
+            Assert.Equal(exp, sql);
+        }
+
+        [Fact]
+        public void UpdateModelWithIdTest2()
+        {
+            var data = new UpdateDemo4 { Id = 1, Name = "cat" };
+            var con = new { id = 1 };
+            var sql = DapperExt.Update(data, con, "myt");
+
+            var exp = "UPDATE myt SET a_id = @Id, last_name = @Name WHERE id = @w_id";
+
+            Assert.Equal(exp, sql);
+        }
     }
 }

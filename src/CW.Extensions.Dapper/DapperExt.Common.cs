@@ -53,11 +53,15 @@
             {
                 var p = updatePropertyInfos[i];
 
+                var columnName = GetDbColumnName(p);
+
+                if (columnName.Equals("id", StringComparison.OrdinalIgnoreCase)) continue;
+
                 if (p.PropertyType == typeof(string))
                 {
                     if (!string.IsNullOrWhiteSpace(Convert.ToString(p.GetValue(obj))))
                     {
-                        sb.AppendFormat("{0} = @{1}, ", GetDbColumnName(p), p.Name);
+                        sb.AppendFormat("{0} = @{1}, ", columnName, p.Name);
                     }
                     else
                     {
@@ -69,7 +73,7 @@
                 {
                     if (p.GetValue(obj) != null)
                     {
-                        sb.AppendFormat("{0} = @{1}, ", GetDbColumnName(p), p.Name);
+                        sb.AppendFormat("{0} = @{1}, ", columnName, p.Name);
                     }
                     else
                     {
@@ -78,7 +82,7 @@
                 }
                 else
                 {
-                    sb.AppendFormat("{0} = @{1}, ", GetDbColumnName(p), p.Name);
+                    sb.AppendFormat("{0} = @{1}, ", columnName, p.Name);
                 }
             }
 
@@ -97,7 +101,11 @@
             {
                 var p = updatePropertyInfos[i];
 
-                sb.AppendFormat("{0} = @{1}", GetDbColumnName(p), p.Name);
+                var columnName = GetDbColumnName(p);
+
+                if (columnName.Equals("id", StringComparison.OrdinalIgnoreCase)) continue;
+
+                sb.AppendFormat("{0} = @{1}", columnName, p.Name);
                 if (i < updatePropertyInfos.Count - 1)
                     sb.AppendFormat(", ");
             }

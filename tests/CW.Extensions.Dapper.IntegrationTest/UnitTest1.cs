@@ -9,7 +9,7 @@ namespace CW.Extensions.Dapper.IntegrationTest
     {
         private const string _connString = "Host=127.0.0.1;Username=postgres;Password=123456;Database=demo";
 
-        [Fact]
+        [Fact(Skip = "")]
         public void Insert_With_DbColumn()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -20,7 +20,7 @@ namespace CW.Extensions.Dapper.IntegrationTest
             Assert.Equal(1, res);
         }
 
-        [Fact]
+        [Fact(Skip = "")]
         public void UpdateNotNull_With_DbColumn()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -31,7 +31,7 @@ namespace CW.Extensions.Dapper.IntegrationTest
             Assert.Equal(1, res);
         }
 
-        [Fact]
+        [Fact(Skip = "")]
         public void Update_With_DbColumn()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -42,7 +42,7 @@ namespace CW.Extensions.Dapper.IntegrationTest
             Assert.Equal(1, res);
         }
 
-        [Fact]
+        [Fact(Skip = "")]
         public void GetCount()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -53,7 +53,7 @@ namespace CW.Extensions.Dapper.IntegrationTest
             Assert.Equal(1, count);
         }
 
-        [Fact]
+        [Fact(Skip = "")]
         public async Task InsertAsync_With_DbColumn()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -64,7 +64,7 @@ namespace CW.Extensions.Dapper.IntegrationTest
             Assert.Equal(1, res);
         }
 
-        [Fact]
+        [Fact(Skip = "")]
         public async Task UpdateNotNullAsync_With_DbColumn()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -75,7 +75,7 @@ namespace CW.Extensions.Dapper.IntegrationTest
             Assert.Equal(1, res);
         }
 
-        [Fact]
+        [Fact(Skip = "")]
         public async Task UpdateAsync_With_DbColumn()
         {
             using var conn = new NpgsqlConnection(_connString);
@@ -86,7 +86,7 @@ namespace CW.Extensions.Dapper.IntegrationTest
             Assert.Equal(1, res);
         }
 
-        [Fact]
+        [Fact(Skip = "")]
         public async Task GetCountAsync()
         {
             using var conn = new NpgsqlConnection(_connString);
